@@ -36,6 +36,15 @@ def missing_values_table(df: pd.DataFrame) -> pd.DataFrame:
     # Return the dataframe with missing information
     return mis_val_table_ren_columns
 
+def categorical_describe(df: pd.DataFrame, cat_cols: list):
+    des_df = df[cat_cols].astype('category').describe()
+    values = des_df.values
+    values[0] = values[0]/ len(df) *100
+    values[-1] = values[-1]/ len(df) * 100
+    cat_df = pd.DataFrame(data = values, columns= des_df.columns,
+                          index = ['count %', 'unique', 'top', 'freq %'])
+    return cat_df
+
 def fix_outlier(df, column):
     df[column] = np.where(df[column] > df[column].quantile(0.95), df[column].median(),df[column])
     
