@@ -24,12 +24,15 @@ Data is devided in four files:
 ## Repo Structure
 ### Folders
 #### Notebooks
-* EDA is done in notebook eda_indepth.ipynb
+* EDA is done in notebook [eda_indepth.ipynb](https://github.com/emtinanseo/Sales-Future-Forecast/blob/main/notebooks/eda_indepth.ipynb)
+* Data preprocessing is done in notebook [data_preprocess.ipynb](https://github.com/emtinanseo/Sales-Future-Forecast/blob/main/notebooks/data_preprocess.ipynb)
 
 
 ## Installation Guide
+'''
 git clone https://github.com/emtinanseo/Sales-Future-Forecast.git
 
 cd Sales-Future-Forecast
 
 pip install -r requirements.txt
+'''
