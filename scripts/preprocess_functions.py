@@ -16,6 +16,8 @@ def date_componants(df: pd.DataFrame, col, col_dates = True) -> pd.DataFrame:
     df['MidMonth'] = df['DayOfMonth'].apply(lambda x:1 if (x>10 & x<=20) else 0)
     df['EndMonth'] = df['DayOfMonth'].apply(lambda x:1 if x>20 else 0)
     
+    df['WeekOfYear'] = dates.isocalendar().week
+    
     df['DayOfYear'] = dates.dayofyear
     df['DayOfWeek'] = dates.dayofweek
     df['IsWeekend'] = df['DayOfWeek'].apply(lambda x: 0 if x < 5 else 1)
@@ -58,4 +60,14 @@ def days_wrt_holiday(df: pd.DataFrame, public= 2, easter=5, chrismas=7):
     df = before_after_holidays(df, chrismas, holidayType = 'c', multiday = True)
         
     return df
+    
+def handle_promo2(df: pd.DataFrame):
+     
+    df['WeeksSincePromo2'] = (df['Year'] - df['Promo2SinceYear'])*52 + df['WeekOfYear'] - df['Promo2SinceWeek']
+    
+    df['WeeksSincePromo2'].fillna(0, inplace = True)
+    
+    return df.drop(columns = ['Promo2SinceYear', 'Promo2SinceWeek', 'PromoInterval'])
+    
+    
     
