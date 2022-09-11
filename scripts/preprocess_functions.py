@@ -69,5 +69,10 @@ def handle_promo2(df: pd.DataFrame):
     
     return df.drop(columns = ['Promo2SinceYear', 'Promo2SinceWeek', 'PromoInterval'])
     
+def handle_competition(df: pd.DataFrame):
+    df['HasCompetition'] = 0
+    df.loc[(df['Month'] >= df['CompetitionOpenSinceMonth'])&(df['Year'] >= df['CompetitionOpenSinceYear']), 
+           'HasCompetition'] = 1
     
+    return df.drop(columns = ['CompetitionOpenSinceMonth', 'CompetitionOpenSinceYear', 'CompetitionDistance'])
     
